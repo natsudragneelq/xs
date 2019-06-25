@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Крестики-нолики</title>
+</head>
+<body>
+<div style="display:inline-block; vertical-align: top ">
+    <img onclick="changeimage('1')" id="1" src="quad.png" width="150">
+    <img onclick="changeimage('2')" id="2" src="quad.png" width="150">
+    <img onclick="changeimage('3')" id="3" src="quad.png" width="150"><br/>
+    <img onclick="changeimage('4')" id="4" src="quad.png" width="150">
+    <img onclick="changeimage('5')" id="5" src="quad.png" width="150">
+    <img onclick="changeimage('6')" id="6" src="quad.png" width="150"><br/>
+    <img onclick="changeimage('7')" id="7" src="quad.png" width="150">
+    <img onclick="changeimage('8')" id="8" src="quad.png" width="150">
+    <img onclick="changeimage('9')" id="9" src="quad.png" width="150">
+</div>
+<div style="display: inline-block; text-align: center">
+    X:<div id="red" >0</div>   <div id="blue">Y:0</div><br/>
+    <img src="refresh.png" onclick="refresh()" width="75">
+</div>
+<script>
+    q = true
+    function changeimage(id) {
+        console.log(document.getElementById(id).src)
+        if(document.getElementById(id).src.includes("quad.png")){
+            q = !q
+            if (q == false) {
+                document.getElementById(id).src = "x.png"
+            }
+            if (q == true) {
+                document.getElementById(id).src = "null.jpg"
+            }
+        }
+        check('1','2','3')
+        check('4','5','6')
+        check('7','8','9')
+        check('1','4','7')
+        check('2','5','8')
+        check('3','6','9')
+        check('1','5','9')
+        check('3','5','7')
+    }
+    function refresh() {
+        document.getElementById('1').src = "quad.png"
+        document.getElementById('2').src = "quad.png"
+        document.getElementById('3').src = "quad.png"
+        document.getElementById('4').src = "quad.png"
+        document.getElementById('5').src = "quad.png"
+        document.getElementById('6').src = "quad.png"
+        document.getElementById('7').src = "quad.png"
+        document.getElementById('8').src = "quad.png"
+        document.getElementById('9').src = "quad.png"
+    }
+   function check (id1, id2, id3) {
+    result =  document.getElementById(id1).src === document.getElementById(id2).src && document.getElementById(id1).src === document.getElementById(id3).src && !document.getElementById(id1).src.includes('quad.png')
+    if (result == true){
+        if (document.getElementById(id1).src.includes('x.png')){
+            document.getElementById('red').innerHTML = parseInt(document.getElementById('red').innerHTML) + 1
+        }
+        if (document.getElementById(id1).src.includes('null.jpg')) {
+            document.getElementById('blue').innerHTML = parseInt(document.getElementById('blue').innerHTML) + 1
+        }
+        refresh()
+    }
+}
+</script>
+</body>
+</html>
